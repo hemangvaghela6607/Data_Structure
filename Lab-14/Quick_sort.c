@@ -1,46 +1,69 @@
-#include<stdio.h>
-void Quick_sort(int[],int,int);
-void main()
+#include <stdio.h>
+#define MAX 100
+/* Function declaration */
+int Partition(int A[], int low, int high);
+void Quick_Sort(int A[], int low, int high)
 {
-	int i,a[50],n;
-	printf("Enter a num in list:");
-	scanf("%d",&n);
-	printf("Enter a number:");
-	for(i=0;i<n;i++){
-		scanf("%d",&a[i]);
-	}
-	
-	Quick_sort(a,0,n-1);
-	printf("sorrted array is :");
-	for(i=0;i<n;i++)
-	{
-		printf("\t%d",a[i]);
-	}
-
+    int pos;
+    if (low < high)
+    {
+        pos = Partition(A, low, high);
+        Quick_Sort(A, low, pos - 1);
+        Quick_Sort(A, pos + 1, high);
+    }
 }
-void Quick_sort(int a[],int lb,int ub)
+int Partition(int A[], int low, int high)
 {
-	int pivot,i,j,temp;
-	if(lb<ub){
-		pivot=lb;
-		i=lb+1;
-		j=ub;
-		while(i<=j){
-		while(a[i]<=a[pivot] && i<=ub)
-			i++;
-		while(a[j]>a[pivot] && j>lb)
-			j--;
-		if(i<j){
-			temp=a[i];
-			a[i]=a[j];
-			a[j]=temp;
-		 }	
-		}
-	temp=a[pivot];
-	a[pivot]=a[j];
-	a[j]=temp;
-	Quick_sort(a,lb,j-1);
-	Quick_sort(a,j+1,ub);
-	}
+    int i, j, temp, pivot;
+    pivot = low;
+    i = low;
+    j = high;
+    while (i < j)
+    {
+        while (A[i] <= A[pivot] && i < high)
+        {
+            i++;
+        }
+        while (A[j] > A[pivot] && j > low)
+        {
+            j--;
+        }
+        if (i < j)
+        {
+            temp = A[i];
+            A[i] = A[j];
+            A[j] = temp;
+        }
+    }
+    temp = A[pivot];
+    A[pivot] = A[j];
+    A[j] = temp;
+    return j;
+}
 
+int main()
+{
+    int i, A[MAX], n;
+    printf("\nEnter the Length of Array:=> ");
+    scanf("%d", &n);
+    if (n <= 0 || n > MAX)
+    {
+        printf("\nInvalid array size!");
+        return 1;
+    }
+    printf("\nEnter Elements of Array:\n");
+    for (i = 0; i < n; i++)
+    {
+        printf("\nA[%d] = ", i);
+        scanf("%d", &A[i]);
+    }
+    Quick_Sort(A, 0, n - 1);
+    printf("\n\nSorted List:\n");
+    printf("------------\n");
+    for (i = 0; i < n; i++)
+    {
+        printf("%d  ", A[i]);
+    }
+    printf("\n");
+    return 0;
 }
