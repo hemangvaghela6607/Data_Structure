@@ -40,7 +40,7 @@ void display(){
         printf("Queue is Empty.");
         return;
     }
-    printf("\nQueue is: ");
+    printf("Queue is: ");
     for(ptr=front;ptr!=NULL;ptr=ptr->next)
         printf("%d ",ptr->data);
 
@@ -48,7 +48,7 @@ void display(){
 void main(){
     int ch;
     while(1){
-        printf("\nQueue using Linked List");
+        printf("\n\nQueue using Linked List");
         printf("\n1. Insert\n2. Delete\n3. Display\n4. Exit");
         printf("\nEnter your choice:");
         scanf("%d",&ch);
